@@ -1,0 +1,14 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+augment_titanic|stem|e68f03c7946b4c85|e44c9cd5ba540923|6f70d638413da3a7|-798739382||t19499.6289070974s|65b178784c943e0c|1134|rds|local|vector|||0.04|There are new levels in a factor DonaNew levels will be coerced to NA by step_unknown.Consider using step_novel before step_unknown.. There are new levels in a factor NA|
+finalize_workflow_titanic|stem|c3f82b6950c0d706|189eb992c4506535|716ca64515b2254a|-237959816||t19499.6288857216s|360d9f09924f6b12|45104|rds|local|vector|||0.05||
+fit_titanic|stem|cae91ad4802ad4e4|68f47b9b2e3b1a24|06045bbff367db9f|-709451412||t19499.6289060123s|0441096b9e4cbcd2|134380|rds|local|vector|||1.71||
+grid_titanic|stem|e904db46b0bfd5aa|95a0dc6d522a044c|64d330ba05bc057e|-1573915539||t19499.626514226s|05a3fc6a889d4685|842|rds|local|vector|||0.07||
+model_titanic|stem|8bea9eb9c30c4d42|3763465920ad4b95|e59531eb59061567|-1950036047||t19498.5790610433s|a28d2cbb8a8abbab|369|rds|local|vector|||2.82||
+recipe_titanic|stem|d30bbdddfbfbfa3c|ffb119c0423447bb|52a3dd84cf03ed08|-215700985||t19499.6265119954s|03a49a86131aac7d|44641|rds|local|vector|||0.01||
+resamples_titanic|stem|704a5b905e328689|a66375943c10f650|0c317e35e385bb59|806174242||t19499.5995758475s|ebac86bbef47c55b|236398|rds|local|vector|||0.02||
+select_best_titanic|stem|0fa3c8777a15e059|669e8a32985a0637|de26eb219d63dfe4|1034530190||t19499.6288844129s|f4cbf14e0e2f6191|267|rds|local|vector|||0.05|No value of metric was given metric roc_auc will be used.|
+separate_wider_regex_name|function|7acd7ca8c104f638|||||||||||||||
+test_titanic|stem|34424feddf9b7bc7|2d8117b38dd94b73|cd66e740862a5971|410013156||t19499.5677865886s|4583ff79394bf60f|10850|rds|local|vector|||0.03||
+train_titanic|stem|48e611e6417b9e98|c27b45fc928ca2bf|cd66e740862a5971|-2104758854||t19499.567785675s|d03efe9818d77329|21466|rds|local|vector|||3.05||
+tune_titanic|stem|bf84bfc65f80e74b|503397101a9adda4|ebb2b1ddc6db60ab|-1460193037||t19499.6288833278s|ff4a406a61b91cda|247895|rds|local|vector|||204.58||
+workflow_titanic|stem|b67145eddcc04722|0de39070a66c993e|9e8964c17fadbe7a|-1180829456||t19499.6265126663s|ec28fce695d7d966|45094|rds|local|vector|||0.01||

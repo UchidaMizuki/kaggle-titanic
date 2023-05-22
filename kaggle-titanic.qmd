@@ -1,0 +1,197 @@
+---
+title: "kaggle-titanic"
+---
+
+```{r}
+#| label: download-data
+#| eval: false
+
+kaggle <- reticulate::import("kaggle")
+kaggle$api$competition_download_files("titanic",
+                                      path = "/kaggle/input")
+zip::unzip("/kaggle/input/titanic.zip",
+           exdir = "/kaggle/input/titanic")
+
+```
+
+```{r}
+#| label: load-packages
+
+library(targets)
+tar_unscript()
+
+```
+
+```{targets}
+#| label: setup
+#| tar_globals: true
+
+options(tidyverse.quiet = TRUE)
+tar_option_set(packages = c("tidyverse", "tidymodels"),
+               seed = 1234)
+
+separate_wider_regex_name <- purrr::partial(tidyr::separate_wider_regex,
+                                            cols = Name,
+                                            patterns = c(".+,\\s",
+                                                         Honorific = ".+",
+                                                         "\\.\\s",
+                                                         LastName = ".+"))
+
+```
+
+```{targets}
+#| label: train_titanic
+#| tar_simple: true
+
+train_titanic <- read_csv("/kaggle/input/titanic/train.csv",
+                          col_types = cols(.default = "n",
+                                           Name = "c",
+                                           Sex = "f",
+                                           Ticket = "c",
+                                           Cabin = "c",
+                                           Embarked = "f")) |> 
+  separate_wider_regex_name()
+
+```
+
+```{targets}
+#| label: test_titanic
+#| tar_simple: true
+
+test_titanic <- read_csv("/kaggle/input/titanic/test.csv",
+                         col_types = cols(.default = "n",
+                                          Name = "c",
+                                          Sex = "f",
+                                          Ticket = "c",
+                                          Cabin = "c",
+                                          Embarked = "f")) |> 
+  separate_wider_regex_name()
+
+```
+
+```{targets}
+#| label: recipe_titanic
+#| tar_simple: true
+
+recipe(train_titanic,
+       Survived ~ .) |> 
+  step_rm(PassengerId, LastName, Ticket, Cabin) |> 
+  step_num2factor(all_outcomes(),
+                  transform = \(x) x + 1L,
+                  levels = c("no", "yes"),
+                  skip = TRUE) |>
+  step_unknown(Sex, Embarked, Honorific) |>
+  step_dummy(Sex, Embarked, Honorific,
+             one_hot = TRUE)
+
+```
+
+```{targets}
+#| label: model_titanic
+#| tar_simple: true
+
+boost_tree(trees = tune(), 
+           min_n = tune(), 
+           tree_depth = tune(), 
+           learn_rate = tune(), 
+           loss_reduction = tune(), 
+           sample_size = tune()) |> 
+  set_mode("classification")
+
+```
+
+```{targets}
+#| label: workflow_titanic
+#| tar_simple: true
+
+workflow() |> 
+  add_recipe(recipe_titanic) |> 
+  add_model(model_titanic)
+
+```
+
+```{targets}
+#| label: resamples_titanic
+#| tar_simple: true
+
+vfold_cv(train_titanic,
+         n = 2e1)
+
+```
+
+```{targets}
+#| label: grid_titanic
+#| tar_simple: true
+
+extract_parameter_set_dials(workflow_titanic) |> 
+  grid_latin_hypercube(size = 2e1)
+
+```
+
+```{targets}
+#| label: tune_titanic
+#| tar_simple: true
+
+tune_grid(workflow_titanic,
+          resamples = resamples_titanic,
+          grid = grid_titanic)
+
+```
+
+```{targets}
+#| label: select_best_titanic
+#| tar_simple: true
+
+select_best(tune_titanic)
+
+```
+
+```{targets}
+#| label: finalize_workflow_titanic
+#| tar_simple: true
+
+finalize_workflow(workflow_titanic, select_best_titanic)
+
+```
+
+```{targets}
+#| label: fit_titanic
+#| tar_simple: true
+
+finalize_workflow_titanic |>
+  fit(data = train_titanic)
+
+```
+
+```{targets}
+#| label: augment_titanic
+#| tar_simple: true
+
+augment(fit_titanic,
+        new_data = test_titanic) |> 
+  select(PassengerId, .pred_class) |> 
+  rename(Survived = .pred_class) |> 
+  mutate(Survived = as.integer(Survived) - 1L)
+
+```
+
+```{r}
+#| label: write-augment_titanic
+
+tar_make()
+tar_load(augment_titanic)
+
+readr::write_csv(augment_titanic, "augment_titanic.csv")
+
+```
+
+```{r}
+#| label: submit-augment_titanic
+#| eval: false
+
+kaggle <- reticulate::import("kaggle")
+kaggle$api$competition_submit(file_name = "augment_titanic.csv", 
+                              message = "submit-2023-05-23",
+                              competition = "titanic")
+
+```
