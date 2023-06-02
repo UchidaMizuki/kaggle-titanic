@@ -30,27 +30,19 @@ options(tidyverse.quiet = TRUE)
 tar_option_set(packages = c("tidyverse", "tidymodels"),
                seed = 1234)
 
-separate_wider_regex_name <- purrr::partial(tidyr::separate_wider_regex,
-                                            cols = Name,
-                                            patterns = c(".+,\\s",
-                                                         Honorific = ".+",
-                                                         "\\.\\s",
-                                                         LastName = ".+"))
-
 ```
 
 ```{targets}
 #| label: train_titanic
 #| tar_simple: true
 
-train_titanic <- read_csv("/kaggle/input/titanic/train.csv",
-                          col_types = cols(.default = "n",
-                                           Name = "c",
-                                           Sex = "f",
-                                           Ticket = "c",
-                                           Cabin = "c",
-                                           Embarked = "f")) |> 
-  separate_wider_regex_name()
+read_csv("/kaggle/input/titanic/train.csv",
+         col_types = cols(.default = "n",
+                          Name = "c",
+                          Sex = "f",
+                          Ticket = "c",
+                          Cabin = "c",
+                          Embarked = "f"))
 
 ```
 
@@ -58,14 +50,13 @@ train_titanic <- read_csv("/kaggle/input/titanic/train.csv",
 #| label: test_titanic
 #| tar_simple: true
 
-test_titanic <- read_csv("/kaggle/input/titanic/test.csv",
-                         col_types = cols(.default = "n",
-                                          Name = "c",
-                                          Sex = "f",
-                                          Ticket = "c",
-                                          Cabin = "c",
-                                          Embarked = "f")) |> 
-  separate_wider_regex_name()
+read_csv("/kaggle/input/titanic/test.csv",
+         col_types = cols(.default = "n",
+                          Name = "c",
+                          Sex = "f",
+                          Ticket = "c",
+                          Cabin = "c",
+                          Embarked = "f"))
 
 ```
 
@@ -75,13 +66,13 @@ test_titanic <- read_csv("/kaggle/input/titanic/test.csv",
 
 recipe(train_titanic,
        Survived ~ .) |> 
-  step_rm(PassengerId, LastName, Ticket, Cabin) |> 
+  step_rm(Name, Ticket, Cabin) |> 
   step_num2factor(all_outcomes(),
                   transform = \(x) x + 1L,
                   levels = c("no", "yes"),
-                  skip = TRUE) |>
-  step_unknown(Sex, Embarked, Honorific) |>
-  step_dummy(Sex, Embarked, Honorific,
+                  skip = TRUE) |> 
+  step_unknown(all_factor_predictors()) |> 
+  step_dummy(all_factor_predictors(),
              one_hot = TRUE)
 
 ```
@@ -90,12 +81,13 @@ recipe(train_titanic,
 #| label: model_titanic
 #| tar_simple: true
 
-boost_tree(trees = tune(), 
-           min_n = tune(), 
-           tree_depth = tune(), 
-           learn_rate = tune(), 
+boost_tree(trees = 1e4, 
+           min_n = tune(), # min_child_weight
+           tree_depth = tune(), # max_depth 
+           learn_rate = 0.1, 
            loss_reduction = tune(), 
-           sample_size = tune()) |> 
+           sample_size = tune(),
+           stop_iter = 1e2) |> 
   set_mode("classification")
 
 ```
@@ -114,8 +106,7 @@ workflow() |>
 #| label: resamples_titanic
 #| tar_simple: true
 
-vfold_cv(train_titanic,
-         n = 2e1)
+vfold_cv(train_titanic)
 
 ```
 
@@ -131,10 +122,12 @@ extract_parameter_set_dials(workflow_titanic) |>
 ```{targets}
 #| label: tune_titanic
 #| tar_simple: true
+#| resuresults: false
 
 tune_grid(workflow_titanic,
           resamples = resamples_titanic,
-          grid = grid_titanic)
+          grid = grid_titanic,
+          control = control_grid(verbose = TRUE))
 
 ```
 
@@ -168,9 +161,9 @@ finalize_workflow_titanic |>
 #| tar_simple: true
 
 augment(fit_titanic,
-        new_data = test_titanic) |> 
-  select(PassengerId, .pred_class) |> 
-  rename(Survived = .pred_class) |> 
+        new_data = test_titanic) |>
+  select(PassengerId, .pred_class) |>
+  rename(Survived = .pred_class) |>
   mutate(Survived = as.integer(Survived) - 1L)
 
 ```
@@ -191,7 +184,7 @@ readr::write_csv(augment_titanic, "augment_titanic.csv")
 
 kaggle <- reticulate::import("kaggle")
 kaggle$api$competition_submit(file_name = "augment_titanic.csv", 
-                              message = "submit-2023-05-23",
+                              message = "submit-2023-06-02",
                               competition = "titanic")
 
 ```

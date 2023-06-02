@@ -136,28 +136,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell" data-tar_globals="true">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tidyverse.quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_option_set</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"tidymodels"</span>, <span class="st">"embed"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>separate_wider_regex_name <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">partial</span>(tidyr<span class="sc">::</span>separate_wider_regex,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">cols =</span> Name,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">patterns =</span> <span class="fu">c</span>(<span class="st">".+,</span><span class="sc">\\</span><span class="st">s"</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                                         <span class="at">Honorific =</span> <span class="st">".+"</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">"</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">s"</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                                         <span class="at">LastName =</span> <span class="st">".+"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_option_set</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"tidymodels"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-tar_simple="true">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(train_titanic, {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  train_titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/kaggle/input/titanic/train.csv"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="st">"n"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Name =</span> <span class="st">"c"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Sex =</span> <span class="st">"f"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Ticket =</span> <span class="st">"c"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Cabin =</span> <span class="st">"c"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Embarked =</span> <span class="st">"f"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">separate_wider_regex_name</span>()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">"/kaggle/input/titanic/train.csv"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="st">"n"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Name =</span> <span class="st">"c"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Sex =</span> <span class="st">"f"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ticket =</span> <span class="st">"c"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Cabin =</span> <span class="st">"c"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Embarked =</span> <span class="st">"f"</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target train_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/train_titanic.R.</code></pre>
@@ -165,16 +157,15 @@ Establish _targets.R and _targets_r/targets/train_titanic.R.</code></pre>
 </div>
 <div class="cell" data-tar_simple="true">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(test_titanic, {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  test_titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/kaggle/input/titanic/test.csv"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="st">"n"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Name =</span> <span class="st">"c"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Sex =</span> <span class="st">"f"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Ticket =</span> <span class="st">"c"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Cabin =</span> <span class="st">"c"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Embarked =</span> <span class="st">"f"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">separate_wider_regex_name</span>()</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">"/kaggle/input/titanic/test.csv"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="st">"n"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Name =</span> <span class="st">"c"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Sex =</span> <span class="st">"f"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ticket =</span> <span class="st">"c"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Cabin =</span> <span class="st">"c"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Embarked =</span> <span class="st">"f"</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target test_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/test_titanic.R.</code></pre>
@@ -184,18 +175,16 @@ Establish _targets.R and _targets_r/targets/test_titanic.R.</code></pre>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(recipe_titanic, {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">recipe</span>(train_titanic,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         Survived <span class="sc">~</span> .) <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_rm</span>(PassengerId) <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_rm</span>(Name, Ticket, Cabin) <span class="sc">|&gt;</span> </span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_num2factor</span>(<span class="fu">all_outcomes</span>(),</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">transform =</span> \(x) x <span class="sc">+</span> 1L,</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"yes"</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">skip =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_unknown</span>(Sex, Embarked, Honorific) <span class="sc">|&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_dummy</span>(Sex, Embarked, Honorific,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">one_hot =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_lencode_mixed</span>(LastName, Ticket, Cabin,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">outcome =</span> <span class="fu">vars</span>(Survived))</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">skip =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_unknown</span>(<span class="fu">all_factor_predictors</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_dummy</span>(<span class="fu">all_factor_predictors</span>(),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">one_hot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target recipe_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/recipe_titanic.R.</code></pre>
@@ -203,15 +192,16 @@ Establish _targets.R and _targets_r/targets/recipe_titanic.R.</code></pre>
 </div>
 <div class="cell" data-tar_simple="true">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(model_titanic, {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">boost_tree</span>(<span class="at">trees =</span> <span class="fu">tune</span>(), </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">min_n =</span> <span class="fu">tune</span>(), </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">tree_depth =</span> <span class="fu">tune</span>(), </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">learn_rate =</span> <span class="fu">tune</span>(), </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">boost_tree</span>(<span class="at">trees =</span> <span class="fl">1e4</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">min_n =</span> <span class="fu">tune</span>(), <span class="co"># min_child_weight</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">tree_depth =</span> <span class="fu">tune</span>(), <span class="co"># max_depth </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">learn_rate =</span> <span class="fl">0.1</span>, </span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">loss_reduction =</span> <span class="fu">tune</span>(), </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">sample_size =</span> <span class="fu">tune</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">sample_size =</span> <span class="fu">tune</span>(),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">stop_iter =</span> <span class="fl">1e2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target model_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/model_titanic.R.</code></pre>
@@ -231,10 +221,9 @@ Establish _targets.R and _targets_r/targets/workflow_titanic.R.</code></pre>
 </div>
 <div class="cell" data-tar_simple="true">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(resamples_titanic, {</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vfold_cv</span>(train_titanic,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">n =</span> <span class="fl">2e1</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vfold_cv</span>(train_titanic)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target resamples_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/resamples_titanic.R.</code></pre>
@@ -255,176 +244,930 @@ Establish _targets.R and _targets_r/targets/grid_titanic.R.</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(tune_titanic, {</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tune_grid</span>(workflow_titanic,</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">resamples =</span> resamples_titanic,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">grid =</span> grid_titanic)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Define target tune_titanic from chunk code.
-Establish _targets.R and _targets_r/targets/tune_titanic.R.</code></pre>
-</div>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">grid =</span> grid_titanic,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">control =</span> <span class="fu">control_grid</span>(<span class="at">verbose =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-tar_simple="true">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(select_best_titanic, {</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_best</span>(tune_titanic)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(select_best_titanic, {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_best</span>(tune_titanic)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target select_best_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/select_best_titanic.R.</code></pre>
 </div>
 </div>
 <div class="cell" data-tar_simple="true">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(finalize_workflow_titanic, {</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalize_workflow</span>(workflow_titanic, select_best_titanic)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(finalize_workflow_titanic, {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalize_workflow</span>(workflow_titanic, select_best_titanic)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target finalize_workflow_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/finalize_workflow_titanic.R.</code></pre>
 </div>
 </div>
 <div class="cell" data-tar_simple="true">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(fit_titanic, {</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  finalize_workflow_titanic <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(<span class="at">data =</span> train_titanic)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(fit_titanic, {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  finalize_workflow_titanic <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(<span class="at">data =</span> train_titanic)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target fit_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/fit_titanic.R.</code></pre>
 </div>
 </div>
 <div class="cell" data-tar_simple="true">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(augment_titanic, {</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(fit_titanic,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">new_data =</span> test_titanic) <span class="sc">|&gt;</span> </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(PassengerId, .pred_class) <span class="sc">|&gt;</span> </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Survived =</span> .pred_class) <span class="sc">|&gt;</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Survived =</span> <span class="fu">as.integer</span>(Survived) <span class="sc">-</span> 1L)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_target</span>(augment_titanic, {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(fit_titanic,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">new_data =</span> test_titanic) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(PassengerId, .pred_class) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Survived =</span> .pred_class) <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Survived =</span> <span class="fu">as.integer</span>(Survived) <span class="sc">-</span> 1L)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define target augment_titanic from chunk code.
 Establish _targets.R and _targets_r/targets/augment_titanic.R.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>✔ skip target model_titanic
 ✔ skip target train_titanic
 ✔ skip target test_titanic
 ✔ skip target resamples_titanic
-• start target recipe_titanic
-• built target recipe_titanic [0.01 seconds]
-• start target workflow_titanic
-• built target workflow_titanic [0.01 seconds]
-• start target grid_titanic
-• built target grid_titanic [0.07 seconds]
-• start target tune_titanic
-→ A | warning: No event observations were detected in `truth` with event level 'no'.
-There were issues with some computations   A: x1
-→ B | warning: Model failed to converge with max|grad| = 0.0174033 (tol = 0.002, component 1)
-There were issues with some computations   A: x1
-There were issues with some computations   A: x2   B: x1
-There were issues with some computations   A: x3   B: x1
-→ C | warning: Model failed to converge with max|grad| = 0.0197964 (tol = 0.002, component 1)
-There were issues with some computations   A: x3   B: x1
-There were issues with some computations   A: x3   B: x1   C: x1
-→ D | warning: There are new levels in a factor: Ms
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x3   B: x1   C: x1
-There were issues with some computations   A: x3   B: x1   C: x1   D: x4
-There were issues with some computations   A: x3   B: x1   C: x1   D: x7
-There were issues with some computations   A: x3   B: x1   C: x1   D: x9
-There were issues with some computations   A: x3   B: x1   C: x1   D: x11
-There were issues with some computations   A: x3   B: x1   C: x1   D: x15
-There were issues with some computations   A: x3   B: x1   C: x1   D: x17
-→ E | warning: There are new levels in a factor: Mrs. Martin (Elizabeth L
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x3   B: x1   C: x1   D: x17
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x4   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-→ F | warning: There are new levels in a factor: Mme, Jonkheer
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-→ G | warning: There are new levels in a factor: Don, Lady
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x6   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-→ H | warning: There are new levels in a factor: Capt, the Countess
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x7   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-→ I | warning: There are new levels in a factor: Sir
-               New levels will be coerced to `NA` by `step_unknown()`.
-               Consider using `step_novel()` before `step_unknown()`., There are new levels in a factor: NA
-There were issues with some computations   A: x8   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x9   B: x1   C: x1   D: x20   E: …
-There were issues with some computations   A: x10   B: x1   C: x1   D: x20   E:…
-
-• built target tune_titanic [3.41 minutes]
-• start target select_best_titanic
-• built target select_best_titanic [0.05 seconds]
-• start target finalize_workflow_titanic
-• built target finalize_workflow_titanic [0.05 seconds]
-• start target fit_titanic
-• built target fit_titanic [1.71 seconds]
-• start target augment_titanic
-• built target augment_titanic [0.04 seconds]
-• end pipeline [3.501 minutes]
+✔ skip target recipe_titanic
+✔ skip target workflow_titanic
+✔ skip target grid_titanic
+▶ start target tune_titanic
+i Fold01: preprocessor 1/1
+✓ Fold01: preprocessor 1/1
+i Fold01: preprocessor 1/1, model 1/20
+✓ Fold01: preprocessor 1/1, model 1/20
+i Fold01: preprocessor 1/1, model 1/20 (extracts)
+i Fold01: preprocessor 1/1, model 1/20 (predictions)
+i Fold01: preprocessor 1/1, model 2/20
+✓ Fold01: preprocessor 1/1, model 2/20
+i Fold01: preprocessor 1/1, model 2/20 (extracts)
+i Fold01: preprocessor 1/1, model 2/20 (predictions)
+i Fold01: preprocessor 1/1, model 3/20
+✓ Fold01: preprocessor 1/1, model 3/20
+i Fold01: preprocessor 1/1, model 3/20 (extracts)
+i Fold01: preprocessor 1/1, model 3/20 (predictions)
+i Fold01: preprocessor 1/1, model 4/20
+✓ Fold01: preprocessor 1/1, model 4/20
+i Fold01: preprocessor 1/1, model 4/20 (extracts)
+i Fold01: preprocessor 1/1, model 4/20 (predictions)
+i Fold01: preprocessor 1/1, model 5/20
+✓ Fold01: preprocessor 1/1, model 5/20
+i Fold01: preprocessor 1/1, model 5/20 (extracts)
+i Fold01: preprocessor 1/1, model 5/20 (predictions)
+i Fold01: preprocessor 1/1, model 6/20
+✓ Fold01: preprocessor 1/1, model 6/20
+i Fold01: preprocessor 1/1, model 6/20 (extracts)
+i Fold01: preprocessor 1/1, model 6/20 (predictions)
+i Fold01: preprocessor 1/1, model 7/20
+✓ Fold01: preprocessor 1/1, model 7/20
+i Fold01: preprocessor 1/1, model 7/20 (extracts)
+i Fold01: preprocessor 1/1, model 7/20 (predictions)
+i Fold01: preprocessor 1/1, model 8/20
+✓ Fold01: preprocessor 1/1, model 8/20
+i Fold01: preprocessor 1/1, model 8/20 (extracts)
+i Fold01: preprocessor 1/1, model 8/20 (predictions)
+i Fold01: preprocessor 1/1, model 9/20
+✓ Fold01: preprocessor 1/1, model 9/20
+i Fold01: preprocessor 1/1, model 9/20 (extracts)
+i Fold01: preprocessor 1/1, model 9/20 (predictions)
+i Fold01: preprocessor 1/1, model 10/20
+✓ Fold01: preprocessor 1/1, model 10/20
+i Fold01: preprocessor 1/1, model 10/20 (extracts)
+i Fold01: preprocessor 1/1, model 10/20 (predictions)
+i Fold01: preprocessor 1/1, model 11/20
+✓ Fold01: preprocessor 1/1, model 11/20
+i Fold01: preprocessor 1/1, model 11/20 (extracts)
+i Fold01: preprocessor 1/1, model 11/20 (predictions)
+i Fold01: preprocessor 1/1, model 12/20
+✓ Fold01: preprocessor 1/1, model 12/20
+i Fold01: preprocessor 1/1, model 12/20 (extracts)
+i Fold01: preprocessor 1/1, model 12/20 (predictions)
+i Fold01: preprocessor 1/1, model 13/20
+✓ Fold01: preprocessor 1/1, model 13/20
+i Fold01: preprocessor 1/1, model 13/20 (extracts)
+i Fold01: preprocessor 1/1, model 13/20 (predictions)
+i Fold01: preprocessor 1/1, model 14/20
+✓ Fold01: preprocessor 1/1, model 14/20
+i Fold01: preprocessor 1/1, model 14/20 (extracts)
+i Fold01: preprocessor 1/1, model 14/20 (predictions)
+i Fold01: preprocessor 1/1, model 15/20
+✓ Fold01: preprocessor 1/1, model 15/20
+i Fold01: preprocessor 1/1, model 15/20 (extracts)
+i Fold01: preprocessor 1/1, model 15/20 (predictions)
+i Fold01: preprocessor 1/1, model 16/20
+✓ Fold01: preprocessor 1/1, model 16/20
+i Fold01: preprocessor 1/1, model 16/20 (extracts)
+i Fold01: preprocessor 1/1, model 16/20 (predictions)
+i Fold01: preprocessor 1/1, model 17/20
+✓ Fold01: preprocessor 1/1, model 17/20
+i Fold01: preprocessor 1/1, model 17/20 (extracts)
+i Fold01: preprocessor 1/1, model 17/20 (predictions)
+i Fold01: preprocessor 1/1, model 18/20
+✓ Fold01: preprocessor 1/1, model 18/20
+i Fold01: preprocessor 1/1, model 18/20 (extracts)
+i Fold01: preprocessor 1/1, model 18/20 (predictions)
+i Fold01: preprocessor 1/1, model 19/20
+✓ Fold01: preprocessor 1/1, model 19/20
+i Fold01: preprocessor 1/1, model 19/20 (extracts)
+i Fold01: preprocessor 1/1, model 19/20 (predictions)
+i Fold01: preprocessor 1/1, model 20/20
+✓ Fold01: preprocessor 1/1, model 20/20
+i Fold01: preprocessor 1/1, model 20/20 (extracts)
+i Fold01: preprocessor 1/1, model 20/20 (predictions)
+! Fold01: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold01: internal
+i Fold02: preprocessor 1/1
+✓ Fold02: preprocessor 1/1
+i Fold02: preprocessor 1/1, model 1/20
+✓ Fold02: preprocessor 1/1, model 1/20
+i Fold02: preprocessor 1/1, model 1/20 (extracts)
+i Fold02: preprocessor 1/1, model 1/20 (predictions)
+i Fold02: preprocessor 1/1, model 2/20
+✓ Fold02: preprocessor 1/1, model 2/20
+i Fold02: preprocessor 1/1, model 2/20 (extracts)
+i Fold02: preprocessor 1/1, model 2/20 (predictions)
+i Fold02: preprocessor 1/1, model 3/20
+✓ Fold02: preprocessor 1/1, model 3/20
+i Fold02: preprocessor 1/1, model 3/20 (extracts)
+i Fold02: preprocessor 1/1, model 3/20 (predictions)
+i Fold02: preprocessor 1/1, model 4/20
+✓ Fold02: preprocessor 1/1, model 4/20
+i Fold02: preprocessor 1/1, model 4/20 (extracts)
+i Fold02: preprocessor 1/1, model 4/20 (predictions)
+i Fold02: preprocessor 1/1, model 5/20
+✓ Fold02: preprocessor 1/1, model 5/20
+i Fold02: preprocessor 1/1, model 5/20 (extracts)
+i Fold02: preprocessor 1/1, model 5/20 (predictions)
+i Fold02: preprocessor 1/1, model 6/20
+✓ Fold02: preprocessor 1/1, model 6/20
+i Fold02: preprocessor 1/1, model 6/20 (extracts)
+i Fold02: preprocessor 1/1, model 6/20 (predictions)
+i Fold02: preprocessor 1/1, model 7/20
+✓ Fold02: preprocessor 1/1, model 7/20
+i Fold02: preprocessor 1/1, model 7/20 (extracts)
+i Fold02: preprocessor 1/1, model 7/20 (predictions)
+i Fold02: preprocessor 1/1, model 8/20
+✓ Fold02: preprocessor 1/1, model 8/20
+i Fold02: preprocessor 1/1, model 8/20 (extracts)
+i Fold02: preprocessor 1/1, model 8/20 (predictions)
+i Fold02: preprocessor 1/1, model 9/20
+✓ Fold02: preprocessor 1/1, model 9/20
+i Fold02: preprocessor 1/1, model 9/20 (extracts)
+i Fold02: preprocessor 1/1, model 9/20 (predictions)
+i Fold02: preprocessor 1/1, model 10/20
+✓ Fold02: preprocessor 1/1, model 10/20
+i Fold02: preprocessor 1/1, model 10/20 (extracts)
+i Fold02: preprocessor 1/1, model 10/20 (predictions)
+i Fold02: preprocessor 1/1, model 11/20
+✓ Fold02: preprocessor 1/1, model 11/20
+i Fold02: preprocessor 1/1, model 11/20 (extracts)
+i Fold02: preprocessor 1/1, model 11/20 (predictions)
+i Fold02: preprocessor 1/1, model 12/20
+✓ Fold02: preprocessor 1/1, model 12/20
+i Fold02: preprocessor 1/1, model 12/20 (extracts)
+i Fold02: preprocessor 1/1, model 12/20 (predictions)
+i Fold02: preprocessor 1/1, model 13/20
+✓ Fold02: preprocessor 1/1, model 13/20
+i Fold02: preprocessor 1/1, model 13/20 (extracts)
+i Fold02: preprocessor 1/1, model 13/20 (predictions)
+i Fold02: preprocessor 1/1, model 14/20
+✓ Fold02: preprocessor 1/1, model 14/20
+i Fold02: preprocessor 1/1, model 14/20 (extracts)
+i Fold02: preprocessor 1/1, model 14/20 (predictions)
+i Fold02: preprocessor 1/1, model 15/20
+✓ Fold02: preprocessor 1/1, model 15/20
+i Fold02: preprocessor 1/1, model 15/20 (extracts)
+i Fold02: preprocessor 1/1, model 15/20 (predictions)
+i Fold02: preprocessor 1/1, model 16/20
+✓ Fold02: preprocessor 1/1, model 16/20
+i Fold02: preprocessor 1/1, model 16/20 (extracts)
+i Fold02: preprocessor 1/1, model 16/20 (predictions)
+i Fold02: preprocessor 1/1, model 17/20
+✓ Fold02: preprocessor 1/1, model 17/20
+i Fold02: preprocessor 1/1, model 17/20 (extracts)
+i Fold02: preprocessor 1/1, model 17/20 (predictions)
+i Fold02: preprocessor 1/1, model 18/20
+✓ Fold02: preprocessor 1/1, model 18/20
+i Fold02: preprocessor 1/1, model 18/20 (extracts)
+i Fold02: preprocessor 1/1, model 18/20 (predictions)
+i Fold02: preprocessor 1/1, model 19/20
+✓ Fold02: preprocessor 1/1, model 19/20
+i Fold02: preprocessor 1/1, model 19/20 (extracts)
+i Fold02: preprocessor 1/1, model 19/20 (predictions)
+i Fold02: preprocessor 1/1, model 20/20
+✓ Fold02: preprocessor 1/1, model 20/20
+i Fold02: preprocessor 1/1, model 20/20 (extracts)
+i Fold02: preprocessor 1/1, model 20/20 (predictions)
+! Fold02: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold02: internal
+i Fold03: preprocessor 1/1
+✓ Fold03: preprocessor 1/1
+i Fold03: preprocessor 1/1, model 1/20
+✓ Fold03: preprocessor 1/1, model 1/20
+i Fold03: preprocessor 1/1, model 1/20 (extracts)
+i Fold03: preprocessor 1/1, model 1/20 (predictions)
+i Fold03: preprocessor 1/1, model 2/20
+✓ Fold03: preprocessor 1/1, model 2/20
+i Fold03: preprocessor 1/1, model 2/20 (extracts)
+i Fold03: preprocessor 1/1, model 2/20 (predictions)
+i Fold03: preprocessor 1/1, model 3/20
+✓ Fold03: preprocessor 1/1, model 3/20
+i Fold03: preprocessor 1/1, model 3/20 (extracts)
+i Fold03: preprocessor 1/1, model 3/20 (predictions)
+i Fold03: preprocessor 1/1, model 4/20
+✓ Fold03: preprocessor 1/1, model 4/20
+i Fold03: preprocessor 1/1, model 4/20 (extracts)
+i Fold03: preprocessor 1/1, model 4/20 (predictions)
+i Fold03: preprocessor 1/1, model 5/20
+✓ Fold03: preprocessor 1/1, model 5/20
+i Fold03: preprocessor 1/1, model 5/20 (extracts)
+i Fold03: preprocessor 1/1, model 5/20 (predictions)
+i Fold03: preprocessor 1/1, model 6/20
+✓ Fold03: preprocessor 1/1, model 6/20
+i Fold03: preprocessor 1/1, model 6/20 (extracts)
+i Fold03: preprocessor 1/1, model 6/20 (predictions)
+i Fold03: preprocessor 1/1, model 7/20
+✓ Fold03: preprocessor 1/1, model 7/20
+i Fold03: preprocessor 1/1, model 7/20 (extracts)
+i Fold03: preprocessor 1/1, model 7/20 (predictions)
+i Fold03: preprocessor 1/1, model 8/20
+✓ Fold03: preprocessor 1/1, model 8/20
+i Fold03: preprocessor 1/1, model 8/20 (extracts)
+i Fold03: preprocessor 1/1, model 8/20 (predictions)
+i Fold03: preprocessor 1/1, model 9/20
+✓ Fold03: preprocessor 1/1, model 9/20
+i Fold03: preprocessor 1/1, model 9/20 (extracts)
+i Fold03: preprocessor 1/1, model 9/20 (predictions)
+i Fold03: preprocessor 1/1, model 10/20
+✓ Fold03: preprocessor 1/1, model 10/20
+i Fold03: preprocessor 1/1, model 10/20 (extracts)
+i Fold03: preprocessor 1/1, model 10/20 (predictions)
+i Fold03: preprocessor 1/1, model 11/20
+✓ Fold03: preprocessor 1/1, model 11/20
+i Fold03: preprocessor 1/1, model 11/20 (extracts)
+i Fold03: preprocessor 1/1, model 11/20 (predictions)
+i Fold03: preprocessor 1/1, model 12/20
+✓ Fold03: preprocessor 1/1, model 12/20
+i Fold03: preprocessor 1/1, model 12/20 (extracts)
+i Fold03: preprocessor 1/1, model 12/20 (predictions)
+i Fold03: preprocessor 1/1, model 13/20
+✓ Fold03: preprocessor 1/1, model 13/20
+i Fold03: preprocessor 1/1, model 13/20 (extracts)
+i Fold03: preprocessor 1/1, model 13/20 (predictions)
+i Fold03: preprocessor 1/1, model 14/20
+✓ Fold03: preprocessor 1/1, model 14/20
+i Fold03: preprocessor 1/1, model 14/20 (extracts)
+i Fold03: preprocessor 1/1, model 14/20 (predictions)
+i Fold03: preprocessor 1/1, model 15/20
+✓ Fold03: preprocessor 1/1, model 15/20
+i Fold03: preprocessor 1/1, model 15/20 (extracts)
+i Fold03: preprocessor 1/1, model 15/20 (predictions)
+i Fold03: preprocessor 1/1, model 16/20
+✓ Fold03: preprocessor 1/1, model 16/20
+i Fold03: preprocessor 1/1, model 16/20 (extracts)
+i Fold03: preprocessor 1/1, model 16/20 (predictions)
+i Fold03: preprocessor 1/1, model 17/20
+✓ Fold03: preprocessor 1/1, model 17/20
+i Fold03: preprocessor 1/1, model 17/20 (extracts)
+i Fold03: preprocessor 1/1, model 17/20 (predictions)
+i Fold03: preprocessor 1/1, model 18/20
+✓ Fold03: preprocessor 1/1, model 18/20
+i Fold03: preprocessor 1/1, model 18/20 (extracts)
+i Fold03: preprocessor 1/1, model 18/20 (predictions)
+i Fold03: preprocessor 1/1, model 19/20
+✓ Fold03: preprocessor 1/1, model 19/20
+i Fold03: preprocessor 1/1, model 19/20 (extracts)
+i Fold03: preprocessor 1/1, model 19/20 (predictions)
+i Fold03: preprocessor 1/1, model 20/20
+✓ Fold03: preprocessor 1/1, model 20/20
+i Fold03: preprocessor 1/1, model 20/20 (extracts)
+i Fold03: preprocessor 1/1, model 20/20 (predictions)
+! Fold03: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold03: internal
+i Fold04: preprocessor 1/1
+✓ Fold04: preprocessor 1/1
+i Fold04: preprocessor 1/1, model 1/20
+✓ Fold04: preprocessor 1/1, model 1/20
+i Fold04: preprocessor 1/1, model 1/20 (extracts)
+i Fold04: preprocessor 1/1, model 1/20 (predictions)
+i Fold04: preprocessor 1/1, model 2/20
+✓ Fold04: preprocessor 1/1, model 2/20
+i Fold04: preprocessor 1/1, model 2/20 (extracts)
+i Fold04: preprocessor 1/1, model 2/20 (predictions)
+i Fold04: preprocessor 1/1, model 3/20
+✓ Fold04: preprocessor 1/1, model 3/20
+i Fold04: preprocessor 1/1, model 3/20 (extracts)
+i Fold04: preprocessor 1/1, model 3/20 (predictions)
+i Fold04: preprocessor 1/1, model 4/20
+✓ Fold04: preprocessor 1/1, model 4/20
+i Fold04: preprocessor 1/1, model 4/20 (extracts)
+i Fold04: preprocessor 1/1, model 4/20 (predictions)
+i Fold04: preprocessor 1/1, model 5/20
+✓ Fold04: preprocessor 1/1, model 5/20
+i Fold04: preprocessor 1/1, model 5/20 (extracts)
+i Fold04: preprocessor 1/1, model 5/20 (predictions)
+i Fold04: preprocessor 1/1, model 6/20
+✓ Fold04: preprocessor 1/1, model 6/20
+i Fold04: preprocessor 1/1, model 6/20 (extracts)
+i Fold04: preprocessor 1/1, model 6/20 (predictions)
+i Fold04: preprocessor 1/1, model 7/20
+✓ Fold04: preprocessor 1/1, model 7/20
+i Fold04: preprocessor 1/1, model 7/20 (extracts)
+i Fold04: preprocessor 1/1, model 7/20 (predictions)
+i Fold04: preprocessor 1/1, model 8/20
+✓ Fold04: preprocessor 1/1, model 8/20
+i Fold04: preprocessor 1/1, model 8/20 (extracts)
+i Fold04: preprocessor 1/1, model 8/20 (predictions)
+i Fold04: preprocessor 1/1, model 9/20
+✓ Fold04: preprocessor 1/1, model 9/20
+i Fold04: preprocessor 1/1, model 9/20 (extracts)
+i Fold04: preprocessor 1/1, model 9/20 (predictions)
+i Fold04: preprocessor 1/1, model 10/20
+✓ Fold04: preprocessor 1/1, model 10/20
+i Fold04: preprocessor 1/1, model 10/20 (extracts)
+i Fold04: preprocessor 1/1, model 10/20 (predictions)
+i Fold04: preprocessor 1/1, model 11/20
+✓ Fold04: preprocessor 1/1, model 11/20
+i Fold04: preprocessor 1/1, model 11/20 (extracts)
+i Fold04: preprocessor 1/1, model 11/20 (predictions)
+i Fold04: preprocessor 1/1, model 12/20
+✓ Fold04: preprocessor 1/1, model 12/20
+i Fold04: preprocessor 1/1, model 12/20 (extracts)
+i Fold04: preprocessor 1/1, model 12/20 (predictions)
+i Fold04: preprocessor 1/1, model 13/20
+✓ Fold04: preprocessor 1/1, model 13/20
+i Fold04: preprocessor 1/1, model 13/20 (extracts)
+i Fold04: preprocessor 1/1, model 13/20 (predictions)
+i Fold04: preprocessor 1/1, model 14/20
+✓ Fold04: preprocessor 1/1, model 14/20
+i Fold04: preprocessor 1/1, model 14/20 (extracts)
+i Fold04: preprocessor 1/1, model 14/20 (predictions)
+i Fold04: preprocessor 1/1, model 15/20
+✓ Fold04: preprocessor 1/1, model 15/20
+i Fold04: preprocessor 1/1, model 15/20 (extracts)
+i Fold04: preprocessor 1/1, model 15/20 (predictions)
+i Fold04: preprocessor 1/1, model 16/20
+✓ Fold04: preprocessor 1/1, model 16/20
+i Fold04: preprocessor 1/1, model 16/20 (extracts)
+i Fold04: preprocessor 1/1, model 16/20 (predictions)
+i Fold04: preprocessor 1/1, model 17/20
+✓ Fold04: preprocessor 1/1, model 17/20
+i Fold04: preprocessor 1/1, model 17/20 (extracts)
+i Fold04: preprocessor 1/1, model 17/20 (predictions)
+i Fold04: preprocessor 1/1, model 18/20
+✓ Fold04: preprocessor 1/1, model 18/20
+i Fold04: preprocessor 1/1, model 18/20 (extracts)
+i Fold04: preprocessor 1/1, model 18/20 (predictions)
+i Fold04: preprocessor 1/1, model 19/20
+✓ Fold04: preprocessor 1/1, model 19/20
+i Fold04: preprocessor 1/1, model 19/20 (extracts)
+i Fold04: preprocessor 1/1, model 19/20 (predictions)
+i Fold04: preprocessor 1/1, model 20/20
+✓ Fold04: preprocessor 1/1, model 20/20
+i Fold04: preprocessor 1/1, model 20/20 (extracts)
+i Fold04: preprocessor 1/1, model 20/20 (predictions)
+! Fold04: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold04: internal
+i Fold05: preprocessor 1/1
+✓ Fold05: preprocessor 1/1
+i Fold05: preprocessor 1/1, model 1/20
+✓ Fold05: preprocessor 1/1, model 1/20
+i Fold05: preprocessor 1/1, model 1/20 (extracts)
+i Fold05: preprocessor 1/1, model 1/20 (predictions)
+i Fold05: preprocessor 1/1, model 2/20
+✓ Fold05: preprocessor 1/1, model 2/20
+i Fold05: preprocessor 1/1, model 2/20 (extracts)
+i Fold05: preprocessor 1/1, model 2/20 (predictions)
+i Fold05: preprocessor 1/1, model 3/20
+✓ Fold05: preprocessor 1/1, model 3/20
+i Fold05: preprocessor 1/1, model 3/20 (extracts)
+i Fold05: preprocessor 1/1, model 3/20 (predictions)
+i Fold05: preprocessor 1/1, model 4/20
+✓ Fold05: preprocessor 1/1, model 4/20
+i Fold05: preprocessor 1/1, model 4/20 (extracts)
+i Fold05: preprocessor 1/1, model 4/20 (predictions)
+i Fold05: preprocessor 1/1, model 5/20
+✓ Fold05: preprocessor 1/1, model 5/20
+i Fold05: preprocessor 1/1, model 5/20 (extracts)
+i Fold05: preprocessor 1/1, model 5/20 (predictions)
+i Fold05: preprocessor 1/1, model 6/20
+✓ Fold05: preprocessor 1/1, model 6/20
+i Fold05: preprocessor 1/1, model 6/20 (extracts)
+i Fold05: preprocessor 1/1, model 6/20 (predictions)
+i Fold05: preprocessor 1/1, model 7/20
+✓ Fold05: preprocessor 1/1, model 7/20
+i Fold05: preprocessor 1/1, model 7/20 (extracts)
+i Fold05: preprocessor 1/1, model 7/20 (predictions)
+i Fold05: preprocessor 1/1, model 8/20
+✓ Fold05: preprocessor 1/1, model 8/20
+i Fold05: preprocessor 1/1, model 8/20 (extracts)
+i Fold05: preprocessor 1/1, model 8/20 (predictions)
+i Fold05: preprocessor 1/1, model 9/20
+✓ Fold05: preprocessor 1/1, model 9/20
+i Fold05: preprocessor 1/1, model 9/20 (extracts)
+i Fold05: preprocessor 1/1, model 9/20 (predictions)
+i Fold05: preprocessor 1/1, model 10/20
+✓ Fold05: preprocessor 1/1, model 10/20
+i Fold05: preprocessor 1/1, model 10/20 (extracts)
+i Fold05: preprocessor 1/1, model 10/20 (predictions)
+i Fold05: preprocessor 1/1, model 11/20
+✓ Fold05: preprocessor 1/1, model 11/20
+i Fold05: preprocessor 1/1, model 11/20 (extracts)
+i Fold05: preprocessor 1/1, model 11/20 (predictions)
+i Fold05: preprocessor 1/1, model 12/20
+✓ Fold05: preprocessor 1/1, model 12/20
+i Fold05: preprocessor 1/1, model 12/20 (extracts)
+i Fold05: preprocessor 1/1, model 12/20 (predictions)
+i Fold05: preprocessor 1/1, model 13/20
+✓ Fold05: preprocessor 1/1, model 13/20
+i Fold05: preprocessor 1/1, model 13/20 (extracts)
+i Fold05: preprocessor 1/1, model 13/20 (predictions)
+i Fold05: preprocessor 1/1, model 14/20
+✓ Fold05: preprocessor 1/1, model 14/20
+i Fold05: preprocessor 1/1, model 14/20 (extracts)
+i Fold05: preprocessor 1/1, model 14/20 (predictions)
+i Fold05: preprocessor 1/1, model 15/20
+✓ Fold05: preprocessor 1/1, model 15/20
+i Fold05: preprocessor 1/1, model 15/20 (extracts)
+i Fold05: preprocessor 1/1, model 15/20 (predictions)
+i Fold05: preprocessor 1/1, model 16/20
+✓ Fold05: preprocessor 1/1, model 16/20
+i Fold05: preprocessor 1/1, model 16/20 (extracts)
+i Fold05: preprocessor 1/1, model 16/20 (predictions)
+i Fold05: preprocessor 1/1, model 17/20
+✓ Fold05: preprocessor 1/1, model 17/20
+i Fold05: preprocessor 1/1, model 17/20 (extracts)
+i Fold05: preprocessor 1/1, model 17/20 (predictions)
+i Fold05: preprocessor 1/1, model 18/20
+✓ Fold05: preprocessor 1/1, model 18/20
+i Fold05: preprocessor 1/1, model 18/20 (extracts)
+i Fold05: preprocessor 1/1, model 18/20 (predictions)
+i Fold05: preprocessor 1/1, model 19/20
+✓ Fold05: preprocessor 1/1, model 19/20
+i Fold05: preprocessor 1/1, model 19/20 (extracts)
+i Fold05: preprocessor 1/1, model 19/20 (predictions)
+i Fold05: preprocessor 1/1, model 20/20
+✓ Fold05: preprocessor 1/1, model 20/20
+i Fold05: preprocessor 1/1, model 20/20 (extracts)
+i Fold05: preprocessor 1/1, model 20/20 (predictions)
+! Fold05: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold05: internal
+i Fold06: preprocessor 1/1
+✓ Fold06: preprocessor 1/1
+i Fold06: preprocessor 1/1, model 1/20
+✓ Fold06: preprocessor 1/1, model 1/20
+i Fold06: preprocessor 1/1, model 1/20 (extracts)
+i Fold06: preprocessor 1/1, model 1/20 (predictions)
+i Fold06: preprocessor 1/1, model 2/20
+✓ Fold06: preprocessor 1/1, model 2/20
+i Fold06: preprocessor 1/1, model 2/20 (extracts)
+i Fold06: preprocessor 1/1, model 2/20 (predictions)
+i Fold06: preprocessor 1/1, model 3/20
+✓ Fold06: preprocessor 1/1, model 3/20
+i Fold06: preprocessor 1/1, model 3/20 (extracts)
+i Fold06: preprocessor 1/1, model 3/20 (predictions)
+i Fold06: preprocessor 1/1, model 4/20
+✓ Fold06: preprocessor 1/1, model 4/20
+i Fold06: preprocessor 1/1, model 4/20 (extracts)
+i Fold06: preprocessor 1/1, model 4/20 (predictions)
+i Fold06: preprocessor 1/1, model 5/20
+✓ Fold06: preprocessor 1/1, model 5/20
+i Fold06: preprocessor 1/1, model 5/20 (extracts)
+i Fold06: preprocessor 1/1, model 5/20 (predictions)
+i Fold06: preprocessor 1/1, model 6/20
+✓ Fold06: preprocessor 1/1, model 6/20
+i Fold06: preprocessor 1/1, model 6/20 (extracts)
+i Fold06: preprocessor 1/1, model 6/20 (predictions)
+i Fold06: preprocessor 1/1, model 7/20
+✓ Fold06: preprocessor 1/1, model 7/20
+i Fold06: preprocessor 1/1, model 7/20 (extracts)
+i Fold06: preprocessor 1/1, model 7/20 (predictions)
+i Fold06: preprocessor 1/1, model 8/20
+✓ Fold06: preprocessor 1/1, model 8/20
+i Fold06: preprocessor 1/1, model 8/20 (extracts)
+i Fold06: preprocessor 1/1, model 8/20 (predictions)
+i Fold06: preprocessor 1/1, model 9/20
+✓ Fold06: preprocessor 1/1, model 9/20
+i Fold06: preprocessor 1/1, model 9/20 (extracts)
+i Fold06: preprocessor 1/1, model 9/20 (predictions)
+i Fold06: preprocessor 1/1, model 10/20
+✓ Fold06: preprocessor 1/1, model 10/20
+i Fold06: preprocessor 1/1, model 10/20 (extracts)
+i Fold06: preprocessor 1/1, model 10/20 (predictions)
+i Fold06: preprocessor 1/1, model 11/20
+✓ Fold06: preprocessor 1/1, model 11/20
+i Fold06: preprocessor 1/1, model 11/20 (extracts)
+i Fold06: preprocessor 1/1, model 11/20 (predictions)
+i Fold06: preprocessor 1/1, model 12/20
+✓ Fold06: preprocessor 1/1, model 12/20
+i Fold06: preprocessor 1/1, model 12/20 (extracts)
+i Fold06: preprocessor 1/1, model 12/20 (predictions)
+i Fold06: preprocessor 1/1, model 13/20
+✓ Fold06: preprocessor 1/1, model 13/20
+i Fold06: preprocessor 1/1, model 13/20 (extracts)
+i Fold06: preprocessor 1/1, model 13/20 (predictions)
+i Fold06: preprocessor 1/1, model 14/20
+✓ Fold06: preprocessor 1/1, model 14/20
+i Fold06: preprocessor 1/1, model 14/20 (extracts)
+i Fold06: preprocessor 1/1, model 14/20 (predictions)
+i Fold06: preprocessor 1/1, model 15/20
+✓ Fold06: preprocessor 1/1, model 15/20
+i Fold06: preprocessor 1/1, model 15/20 (extracts)
+i Fold06: preprocessor 1/1, model 15/20 (predictions)
+i Fold06: preprocessor 1/1, model 16/20
+✓ Fold06: preprocessor 1/1, model 16/20
+i Fold06: preprocessor 1/1, model 16/20 (extracts)
+i Fold06: preprocessor 1/1, model 16/20 (predictions)
+i Fold06: preprocessor 1/1, model 17/20
+✓ Fold06: preprocessor 1/1, model 17/20
+i Fold06: preprocessor 1/1, model 17/20 (extracts)
+i Fold06: preprocessor 1/1, model 17/20 (predictions)
+i Fold06: preprocessor 1/1, model 18/20
+✓ Fold06: preprocessor 1/1, model 18/20
+i Fold06: preprocessor 1/1, model 18/20 (extracts)
+i Fold06: preprocessor 1/1, model 18/20 (predictions)
+i Fold06: preprocessor 1/1, model 19/20
+✓ Fold06: preprocessor 1/1, model 19/20
+i Fold06: preprocessor 1/1, model 19/20 (extracts)
+i Fold06: preprocessor 1/1, model 19/20 (predictions)
+i Fold06: preprocessor 1/1, model 20/20
+✓ Fold06: preprocessor 1/1, model 20/20
+i Fold06: preprocessor 1/1, model 20/20 (extracts)
+i Fold06: preprocessor 1/1, model 20/20 (predictions)
+! Fold06: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold06: internal
+i Fold07: preprocessor 1/1
+✓ Fold07: preprocessor 1/1
+i Fold07: preprocessor 1/1, model 1/20
+✓ Fold07: preprocessor 1/1, model 1/20
+i Fold07: preprocessor 1/1, model 1/20 (extracts)
+i Fold07: preprocessor 1/1, model 1/20 (predictions)
+i Fold07: preprocessor 1/1, model 2/20
+✓ Fold07: preprocessor 1/1, model 2/20
+i Fold07: preprocessor 1/1, model 2/20 (extracts)
+i Fold07: preprocessor 1/1, model 2/20 (predictions)
+i Fold07: preprocessor 1/1, model 3/20
+✓ Fold07: preprocessor 1/1, model 3/20
+i Fold07: preprocessor 1/1, model 3/20 (extracts)
+i Fold07: preprocessor 1/1, model 3/20 (predictions)
+i Fold07: preprocessor 1/1, model 4/20
+✓ Fold07: preprocessor 1/1, model 4/20
+i Fold07: preprocessor 1/1, model 4/20 (extracts)
+i Fold07: preprocessor 1/1, model 4/20 (predictions)
+i Fold07: preprocessor 1/1, model 5/20
+✓ Fold07: preprocessor 1/1, model 5/20
+i Fold07: preprocessor 1/1, model 5/20 (extracts)
+i Fold07: preprocessor 1/1, model 5/20 (predictions)
+i Fold07: preprocessor 1/1, model 6/20
+✓ Fold07: preprocessor 1/1, model 6/20
+i Fold07: preprocessor 1/1, model 6/20 (extracts)
+i Fold07: preprocessor 1/1, model 6/20 (predictions)
+i Fold07: preprocessor 1/1, model 7/20
+✓ Fold07: preprocessor 1/1, model 7/20
+i Fold07: preprocessor 1/1, model 7/20 (extracts)
+i Fold07: preprocessor 1/1, model 7/20 (predictions)
+i Fold07: preprocessor 1/1, model 8/20
+✓ Fold07: preprocessor 1/1, model 8/20
+i Fold07: preprocessor 1/1, model 8/20 (extracts)
+i Fold07: preprocessor 1/1, model 8/20 (predictions)
+i Fold07: preprocessor 1/1, model 9/20
+✓ Fold07: preprocessor 1/1, model 9/20
+i Fold07: preprocessor 1/1, model 9/20 (extracts)
+i Fold07: preprocessor 1/1, model 9/20 (predictions)
+i Fold07: preprocessor 1/1, model 10/20
+✓ Fold07: preprocessor 1/1, model 10/20
+i Fold07: preprocessor 1/1, model 10/20 (extracts)
+i Fold07: preprocessor 1/1, model 10/20 (predictions)
+i Fold07: preprocessor 1/1, model 11/20
+✓ Fold07: preprocessor 1/1, model 11/20
+i Fold07: preprocessor 1/1, model 11/20 (extracts)
+i Fold07: preprocessor 1/1, model 11/20 (predictions)
+i Fold07: preprocessor 1/1, model 12/20
+✓ Fold07: preprocessor 1/1, model 12/20
+i Fold07: preprocessor 1/1, model 12/20 (extracts)
+i Fold07: preprocessor 1/1, model 12/20 (predictions)
+i Fold07: preprocessor 1/1, model 13/20
+✓ Fold07: preprocessor 1/1, model 13/20
+i Fold07: preprocessor 1/1, model 13/20 (extracts)
+i Fold07: preprocessor 1/1, model 13/20 (predictions)
+i Fold07: preprocessor 1/1, model 14/20
+✓ Fold07: preprocessor 1/1, model 14/20
+i Fold07: preprocessor 1/1, model 14/20 (extracts)
+i Fold07: preprocessor 1/1, model 14/20 (predictions)
+i Fold07: preprocessor 1/1, model 15/20
+✓ Fold07: preprocessor 1/1, model 15/20
+i Fold07: preprocessor 1/1, model 15/20 (extracts)
+i Fold07: preprocessor 1/1, model 15/20 (predictions)
+i Fold07: preprocessor 1/1, model 16/20
+✓ Fold07: preprocessor 1/1, model 16/20
+i Fold07: preprocessor 1/1, model 16/20 (extracts)
+i Fold07: preprocessor 1/1, model 16/20 (predictions)
+i Fold07: preprocessor 1/1, model 17/20
+✓ Fold07: preprocessor 1/1, model 17/20
+i Fold07: preprocessor 1/1, model 17/20 (extracts)
+i Fold07: preprocessor 1/1, model 17/20 (predictions)
+i Fold07: preprocessor 1/1, model 18/20
+✓ Fold07: preprocessor 1/1, model 18/20
+i Fold07: preprocessor 1/1, model 18/20 (extracts)
+i Fold07: preprocessor 1/1, model 18/20 (predictions)
+i Fold07: preprocessor 1/1, model 19/20
+✓ Fold07: preprocessor 1/1, model 19/20
+i Fold07: preprocessor 1/1, model 19/20 (extracts)
+i Fold07: preprocessor 1/1, model 19/20 (predictions)
+i Fold07: preprocessor 1/1, model 20/20
+✓ Fold07: preprocessor 1/1, model 20/20
+i Fold07: preprocessor 1/1, model 20/20 (extracts)
+i Fold07: preprocessor 1/1, model 20/20 (predictions)
+! Fold07: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold07: internal
+i Fold08: preprocessor 1/1
+✓ Fold08: preprocessor 1/1
+i Fold08: preprocessor 1/1, model 1/20
+✓ Fold08: preprocessor 1/1, model 1/20
+i Fold08: preprocessor 1/1, model 1/20 (extracts)
+i Fold08: preprocessor 1/1, model 1/20 (predictions)
+i Fold08: preprocessor 1/1, model 2/20
+✓ Fold08: preprocessor 1/1, model 2/20
+i Fold08: preprocessor 1/1, model 2/20 (extracts)
+i Fold08: preprocessor 1/1, model 2/20 (predictions)
+i Fold08: preprocessor 1/1, model 3/20
+✓ Fold08: preprocessor 1/1, model 3/20
+i Fold08: preprocessor 1/1, model 3/20 (extracts)
+i Fold08: preprocessor 1/1, model 3/20 (predictions)
+i Fold08: preprocessor 1/1, model 4/20
+✓ Fold08: preprocessor 1/1, model 4/20
+i Fold08: preprocessor 1/1, model 4/20 (extracts)
+i Fold08: preprocessor 1/1, model 4/20 (predictions)
+i Fold08: preprocessor 1/1, model 5/20
+✓ Fold08: preprocessor 1/1, model 5/20
+i Fold08: preprocessor 1/1, model 5/20 (extracts)
+i Fold08: preprocessor 1/1, model 5/20 (predictions)
+i Fold08: preprocessor 1/1, model 6/20
+✓ Fold08: preprocessor 1/1, model 6/20
+i Fold08: preprocessor 1/1, model 6/20 (extracts)
+i Fold08: preprocessor 1/1, model 6/20 (predictions)
+i Fold08: preprocessor 1/1, model 7/20
+✓ Fold08: preprocessor 1/1, model 7/20
+i Fold08: preprocessor 1/1, model 7/20 (extracts)
+i Fold08: preprocessor 1/1, model 7/20 (predictions)
+i Fold08: preprocessor 1/1, model 8/20
+✓ Fold08: preprocessor 1/1, model 8/20
+i Fold08: preprocessor 1/1, model 8/20 (extracts)
+i Fold08: preprocessor 1/1, model 8/20 (predictions)
+i Fold08: preprocessor 1/1, model 9/20
+✓ Fold08: preprocessor 1/1, model 9/20
+i Fold08: preprocessor 1/1, model 9/20 (extracts)
+i Fold08: preprocessor 1/1, model 9/20 (predictions)
+i Fold08: preprocessor 1/1, model 10/20
+✓ Fold08: preprocessor 1/1, model 10/20
+i Fold08: preprocessor 1/1, model 10/20 (extracts)
+i Fold08: preprocessor 1/1, model 10/20 (predictions)
+i Fold08: preprocessor 1/1, model 11/20
+✓ Fold08: preprocessor 1/1, model 11/20
+i Fold08: preprocessor 1/1, model 11/20 (extracts)
+i Fold08: preprocessor 1/1, model 11/20 (predictions)
+i Fold08: preprocessor 1/1, model 12/20
+✓ Fold08: preprocessor 1/1, model 12/20
+i Fold08: preprocessor 1/1, model 12/20 (extracts)
+i Fold08: preprocessor 1/1, model 12/20 (predictions)
+i Fold08: preprocessor 1/1, model 13/20
+✓ Fold08: preprocessor 1/1, model 13/20
+i Fold08: preprocessor 1/1, model 13/20 (extracts)
+i Fold08: preprocessor 1/1, model 13/20 (predictions)
+i Fold08: preprocessor 1/1, model 14/20
+✓ Fold08: preprocessor 1/1, model 14/20
+i Fold08: preprocessor 1/1, model 14/20 (extracts)
+i Fold08: preprocessor 1/1, model 14/20 (predictions)
+i Fold08: preprocessor 1/1, model 15/20
+✓ Fold08: preprocessor 1/1, model 15/20
+i Fold08: preprocessor 1/1, model 15/20 (extracts)
+i Fold08: preprocessor 1/1, model 15/20 (predictions)
+i Fold08: preprocessor 1/1, model 16/20
+✓ Fold08: preprocessor 1/1, model 16/20
+i Fold08: preprocessor 1/1, model 16/20 (extracts)
+i Fold08: preprocessor 1/1, model 16/20 (predictions)
+i Fold08: preprocessor 1/1, model 17/20
+✓ Fold08: preprocessor 1/1, model 17/20
+i Fold08: preprocessor 1/1, model 17/20 (extracts)
+i Fold08: preprocessor 1/1, model 17/20 (predictions)
+i Fold08: preprocessor 1/1, model 18/20
+✓ Fold08: preprocessor 1/1, model 18/20
+i Fold08: preprocessor 1/1, model 18/20 (extracts)
+i Fold08: preprocessor 1/1, model 18/20 (predictions)
+i Fold08: preprocessor 1/1, model 19/20
+✓ Fold08: preprocessor 1/1, model 19/20
+i Fold08: preprocessor 1/1, model 19/20 (extracts)
+i Fold08: preprocessor 1/1, model 19/20 (predictions)
+i Fold08: preprocessor 1/1, model 20/20
+✓ Fold08: preprocessor 1/1, model 20/20
+i Fold08: preprocessor 1/1, model 20/20 (extracts)
+i Fold08: preprocessor 1/1, model 20/20 (predictions)
+! Fold08: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold08: internal
+i Fold09: preprocessor 1/1
+✓ Fold09: preprocessor 1/1
+i Fold09: preprocessor 1/1, model 1/20
+✓ Fold09: preprocessor 1/1, model 1/20
+i Fold09: preprocessor 1/1, model 1/20 (extracts)
+i Fold09: preprocessor 1/1, model 1/20 (predictions)
+i Fold09: preprocessor 1/1, model 2/20
+✓ Fold09: preprocessor 1/1, model 2/20
+i Fold09: preprocessor 1/1, model 2/20 (extracts)
+i Fold09: preprocessor 1/1, model 2/20 (predictions)
+i Fold09: preprocessor 1/1, model 3/20
+✓ Fold09: preprocessor 1/1, model 3/20
+i Fold09: preprocessor 1/1, model 3/20 (extracts)
+i Fold09: preprocessor 1/1, model 3/20 (predictions)
+i Fold09: preprocessor 1/1, model 4/20
+✓ Fold09: preprocessor 1/1, model 4/20
+i Fold09: preprocessor 1/1, model 4/20 (extracts)
+i Fold09: preprocessor 1/1, model 4/20 (predictions)
+i Fold09: preprocessor 1/1, model 5/20
+✓ Fold09: preprocessor 1/1, model 5/20
+i Fold09: preprocessor 1/1, model 5/20 (extracts)
+i Fold09: preprocessor 1/1, model 5/20 (predictions)
+i Fold09: preprocessor 1/1, model 6/20
+✓ Fold09: preprocessor 1/1, model 6/20
+i Fold09: preprocessor 1/1, model 6/20 (extracts)
+i Fold09: preprocessor 1/1, model 6/20 (predictions)
+i Fold09: preprocessor 1/1, model 7/20
+✓ Fold09: preprocessor 1/1, model 7/20
+i Fold09: preprocessor 1/1, model 7/20 (extracts)
+i Fold09: preprocessor 1/1, model 7/20 (predictions)
+i Fold09: preprocessor 1/1, model 8/20
+✓ Fold09: preprocessor 1/1, model 8/20
+i Fold09: preprocessor 1/1, model 8/20 (extracts)
+i Fold09: preprocessor 1/1, model 8/20 (predictions)
+i Fold09: preprocessor 1/1, model 9/20
+✓ Fold09: preprocessor 1/1, model 9/20
+i Fold09: preprocessor 1/1, model 9/20 (extracts)
+i Fold09: preprocessor 1/1, model 9/20 (predictions)
+i Fold09: preprocessor 1/1, model 10/20
+✓ Fold09: preprocessor 1/1, model 10/20
+i Fold09: preprocessor 1/1, model 10/20 (extracts)
+i Fold09: preprocessor 1/1, model 10/20 (predictions)
+i Fold09: preprocessor 1/1, model 11/20
+✓ Fold09: preprocessor 1/1, model 11/20
+i Fold09: preprocessor 1/1, model 11/20 (extracts)
+i Fold09: preprocessor 1/1, model 11/20 (predictions)
+i Fold09: preprocessor 1/1, model 12/20
+✓ Fold09: preprocessor 1/1, model 12/20
+i Fold09: preprocessor 1/1, model 12/20 (extracts)
+i Fold09: preprocessor 1/1, model 12/20 (predictions)
+i Fold09: preprocessor 1/1, model 13/20
+✓ Fold09: preprocessor 1/1, model 13/20
+i Fold09: preprocessor 1/1, model 13/20 (extracts)
+i Fold09: preprocessor 1/1, model 13/20 (predictions)
+i Fold09: preprocessor 1/1, model 14/20
+✓ Fold09: preprocessor 1/1, model 14/20
+i Fold09: preprocessor 1/1, model 14/20 (extracts)
+i Fold09: preprocessor 1/1, model 14/20 (predictions)
+i Fold09: preprocessor 1/1, model 15/20
+✓ Fold09: preprocessor 1/1, model 15/20
+i Fold09: preprocessor 1/1, model 15/20 (extracts)
+i Fold09: preprocessor 1/1, model 15/20 (predictions)
+i Fold09: preprocessor 1/1, model 16/20
+✓ Fold09: preprocessor 1/1, model 16/20
+i Fold09: preprocessor 1/1, model 16/20 (extracts)
+i Fold09: preprocessor 1/1, model 16/20 (predictions)
+i Fold09: preprocessor 1/1, model 17/20
+✓ Fold09: preprocessor 1/1, model 17/20
+i Fold09: preprocessor 1/1, model 17/20 (extracts)
+i Fold09: preprocessor 1/1, model 17/20 (predictions)
+i Fold09: preprocessor 1/1, model 18/20
+✓ Fold09: preprocessor 1/1, model 18/20
+i Fold09: preprocessor 1/1, model 18/20 (extracts)
+i Fold09: preprocessor 1/1, model 18/20 (predictions)
+i Fold09: preprocessor 1/1, model 19/20
+✓ Fold09: preprocessor 1/1, model 19/20
+i Fold09: preprocessor 1/1, model 19/20 (extracts)
+i Fold09: preprocessor 1/1, model 19/20 (predictions)
+i Fold09: preprocessor 1/1, model 20/20
+✓ Fold09: preprocessor 1/1, model 20/20
+i Fold09: preprocessor 1/1, model 20/20 (extracts)
+i Fold09: preprocessor 1/1, model 20/20 (predictions)
+! Fold09: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold09: internal
+i Fold10: preprocessor 1/1
+✓ Fold10: preprocessor 1/1
+i Fold10: preprocessor 1/1, model 1/20
+✓ Fold10: preprocessor 1/1, model 1/20
+i Fold10: preprocessor 1/1, model 1/20 (extracts)
+i Fold10: preprocessor 1/1, model 1/20 (predictions)
+i Fold10: preprocessor 1/1, model 2/20
+✓ Fold10: preprocessor 1/1, model 2/20
+i Fold10: preprocessor 1/1, model 2/20 (extracts)
+i Fold10: preprocessor 1/1, model 2/20 (predictions)
+i Fold10: preprocessor 1/1, model 3/20
+✓ Fold10: preprocessor 1/1, model 3/20
+i Fold10: preprocessor 1/1, model 3/20 (extracts)
+i Fold10: preprocessor 1/1, model 3/20 (predictions)
+i Fold10: preprocessor 1/1, model 4/20
+✓ Fold10: preprocessor 1/1, model 4/20
+i Fold10: preprocessor 1/1, model 4/20 (extracts)
+i Fold10: preprocessor 1/1, model 4/20 (predictions)
+i Fold10: preprocessor 1/1, model 5/20
+✓ Fold10: preprocessor 1/1, model 5/20
+i Fold10: preprocessor 1/1, model 5/20 (extracts)
+i Fold10: preprocessor 1/1, model 5/20 (predictions)
+i Fold10: preprocessor 1/1, model 6/20
+✓ Fold10: preprocessor 1/1, model 6/20
+i Fold10: preprocessor 1/1, model 6/20 (extracts)
+i Fold10: preprocessor 1/1, model 6/20 (predictions)
+i Fold10: preprocessor 1/1, model 7/20
+✓ Fold10: preprocessor 1/1, model 7/20
+i Fold10: preprocessor 1/1, model 7/20 (extracts)
+i Fold10: preprocessor 1/1, model 7/20 (predictions)
+i Fold10: preprocessor 1/1, model 8/20
+✓ Fold10: preprocessor 1/1, model 8/20
+i Fold10: preprocessor 1/1, model 8/20 (extracts)
+i Fold10: preprocessor 1/1, model 8/20 (predictions)
+i Fold10: preprocessor 1/1, model 9/20
+✓ Fold10: preprocessor 1/1, model 9/20
+i Fold10: preprocessor 1/1, model 9/20 (extracts)
+i Fold10: preprocessor 1/1, model 9/20 (predictions)
+i Fold10: preprocessor 1/1, model 10/20
+✓ Fold10: preprocessor 1/1, model 10/20
+i Fold10: preprocessor 1/1, model 10/20 (extracts)
+i Fold10: preprocessor 1/1, model 10/20 (predictions)
+i Fold10: preprocessor 1/1, model 11/20
+✓ Fold10: preprocessor 1/1, model 11/20
+i Fold10: preprocessor 1/1, model 11/20 (extracts)
+i Fold10: preprocessor 1/1, model 11/20 (predictions)
+i Fold10: preprocessor 1/1, model 12/20
+✓ Fold10: preprocessor 1/1, model 12/20
+i Fold10: preprocessor 1/1, model 12/20 (extracts)
+i Fold10: preprocessor 1/1, model 12/20 (predictions)
+i Fold10: preprocessor 1/1, model 13/20
+✓ Fold10: preprocessor 1/1, model 13/20
+i Fold10: preprocessor 1/1, model 13/20 (extracts)
+i Fold10: preprocessor 1/1, model 13/20 (predictions)
+i Fold10: preprocessor 1/1, model 14/20
+✓ Fold10: preprocessor 1/1, model 14/20
+i Fold10: preprocessor 1/1, model 14/20 (extracts)
+i Fold10: preprocessor 1/1, model 14/20 (predictions)
+i Fold10: preprocessor 1/1, model 15/20
+✓ Fold10: preprocessor 1/1, model 15/20
+i Fold10: preprocessor 1/1, model 15/20 (extracts)
+i Fold10: preprocessor 1/1, model 15/20 (predictions)
+i Fold10: preprocessor 1/1, model 16/20
+✓ Fold10: preprocessor 1/1, model 16/20
+i Fold10: preprocessor 1/1, model 16/20 (extracts)
+i Fold10: preprocessor 1/1, model 16/20 (predictions)
+i Fold10: preprocessor 1/1, model 17/20
+✓ Fold10: preprocessor 1/1, model 17/20
+i Fold10: preprocessor 1/1, model 17/20 (extracts)
+i Fold10: preprocessor 1/1, model 17/20 (predictions)
+i Fold10: preprocessor 1/1, model 18/20
+✓ Fold10: preprocessor 1/1, model 18/20
+i Fold10: preprocessor 1/1, model 18/20 (extracts)
+i Fold10: preprocessor 1/1, model 18/20 (predictions)
+i Fold10: preprocessor 1/1, model 19/20
+✓ Fold10: preprocessor 1/1, model 19/20
+i Fold10: preprocessor 1/1, model 19/20 (extracts)
+i Fold10: preprocessor 1/1, model 19/20 (predictions)
+i Fold10: preprocessor 1/1, model 20/20
+✓ Fold10: preprocessor 1/1, model 20/20
+i Fold10: preprocessor 1/1, model 20/20 (extracts)
+i Fold10: preprocessor 1/1, model 20/20 (predictions)
+! Fold10: internal: No event observations were detected in `truth` with event level 'no'.
+✓ Fold10: internal
+● built target tune_titanic [22.483 minutes]
+▶ start target select_best_titanic
+● built target select_best_titanic [0.06 seconds]
+▶ start target finalize_workflow_titanic
+● built target finalize_workflow_titanic [0.05 seconds]
+▶ start target fit_titanic
+● built target fit_titanic [1.75 seconds]
+▶ start target augment_titanic
+● built target augment_titanic [0.05 seconds]
+▶ end pipeline [22.568 minutes]
 Warning messages:
 1: No value of `metric` was given; metric 'roc_auc' will be used. 
-2: There are new levels in a factor: Dona
-New levels will be coerced to `NA` by `step_unknown()`.
-Consider using `step_novel()` before `step_unknown()`. 
-3: There are new levels in a factor: NA 
-4: 2 targets produced warnings. Run targets::tar_meta(fields = warnings, complete_only = TRUE) for the messages. </code></pre>
+2: 1 targets produced warnings. Run targets::tar_meta(fields = warnings, complete_only = TRUE) for the messages. </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(augment_titanic)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(augment_titanic, <span class="st">"augment_titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(augment_titanic)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(augment_titanic, <span class="st">"augment_titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>kaggle <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"kaggle"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>kaggle<span class="sc">$</span>api<span class="sc">$</span><span class="fu">competition_submit</span>(<span class="at">file_name =</span> <span class="st">"augment_titanic.csv"</span>, </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">message =</span> <span class="st">"submit-2023-05-23"</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">competition =</span> <span class="st">"titanic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>kaggle <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"kaggle"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>kaggle<span class="sc">$</span>api<span class="sc">$</span><span class="fu">competition_submit</span>(<span class="at">file_name =</span> <span class="st">"augment_titanic.csv"</span>, </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">message =</span> <span class="st">"submit-2023-05-22"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">competition =</span> <span class="st">"titanic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </main>
